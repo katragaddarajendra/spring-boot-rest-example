@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-example-deployment
+  labels:
+    app: react-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-example
+  template:
+    metadata:
+      labels:
+        app: react-example
+    spec:
+      containers:
+      - name: react-example
+        image: katragaddarajendra/react-example:v4
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-example-service
+spec:
+  selector:
+    app: react-example  
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

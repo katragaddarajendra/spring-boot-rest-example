@@ -1,0 +1,21 @@
+version: '3.7'
+
+networks:
+  example:
+
+services:
+  spring-boot-rest-example-service:
+    image: katragaddarajendra/spring-boot-rest-example:v2
+    tty: true
+    networks:
+     - example
+    ports:
+     - "8080:8080"
+
+  react-example-service:
+    image: katragaddarajendra/react-example:v2
+    networks:
+     - example
+    ports:
+     - "3000:3000"
+          

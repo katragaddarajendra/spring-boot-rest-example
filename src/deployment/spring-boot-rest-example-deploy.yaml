@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-rest-example-deployment
+  labels:
+    app: spring-boot-rest-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-rest-example
+  template:
+    metadata:
+      labels:
+        app: spring-boot-rest-example
+    spec:
+      containers:
+      - name: spring-boot-rest-example
+        image: katragaddarajendra/spring-boot-rest-example:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-rest-example-service
+spec:
+  selector:
+    app: spring-boot-rest-example
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
